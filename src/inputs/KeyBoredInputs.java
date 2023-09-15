@@ -39,6 +39,9 @@ public class KeyBoredInputs implements KeyListener {
                 break;
             case KeyEvent.VK_P:
                 gamePanel.getGame().getPlayer().setAttacking(true);
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(true);
+                break;
         }
     }
 
@@ -57,6 +60,9 @@ public class KeyBoredInputs implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(false);
+                break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(false);
                 break;
         }
     }

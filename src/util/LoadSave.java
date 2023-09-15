@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 public class LoadSave {
 
-    public static final String PLAYER_ATLAS = "/player/final-knight.png";
+    public static final String PLAYER_ATLAS = "/player/final-knight3.png";
     public static final String LEVEL_ATLAS = "/levels/final.png";
     public static final String LEVEL_ONE_DATA = "/levels/level_one_data.png";
 
