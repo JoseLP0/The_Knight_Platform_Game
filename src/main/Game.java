@@ -1,7 +1,8 @@
 package main;
 
-import entities.Player;
-import levels.LevelManager;
+import gamestates.Gamestate;
+import gamestates.Menu;
+import gamestates.Playing;
 
 import java.awt.*;
 
@@ -11,8 +12,9 @@ public class Game implements Runnable {
     private Thread thread;
     private final int FPS_SET = 120;
     private final int UPD_SET = 200;
-    private Player player;
-    private LevelManager levelManager;
+
+    private Playing playing;
+    private Menu menu;
 
     public final static int TILES_DEFAULT_SIZE = 38;
     public final static float SCALE  = 1.2f;
@@ -37,9 +39,8 @@ public class Game implements Runnable {
     }
 
     private void initializeClasses() {
-        levelManager = new LevelManager(this);
-        player = new Player(200, 200, (int) (64*SCALE), (int) (64*SCALE));
-        player.loadLvlDate(levelManager.getCurrentLvl().getLvlData());
+        menu = new Menu(this);
+        playing = new Playing(this);
     }
 
     private void startGameLoop() {
@@ -48,14 +49,32 @@ public class Game implements Runnable {
     }
 
     public void update() {
-        player.update();
-        levelManager.update();
+        switch(Gamestate.state) {
+            case MENU:
+                menu.update();
+                break;
+            case PlAYING:
+                playing.update();
+                break;
+            case OPTIONS:
+            case QUIT:
+            default:
+                System.exit(0);
+                break;
+        }
     }
 
     public void render(Graphics g){
-        levelManager.draw(g);
-
-        player.render(g);
+        switch(Gamestate.state) {
+            case MENU:
+                menu.draw(g);
+                break;
+            case PlAYING:
+                playing.draw(g);
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -104,12 +123,19 @@ public class Game implements Runnable {
     }
 
     public void windowFocusLost() {
-        player.resetDirectionBooleans();
+        if(Gamestate.state == Gamestate.PlAYING) {
+            playing.getPlayer().resetDirectionBooleans();
+        }
     }
 
-    public Player getPlayer() {
-        return player;
+    public Menu getMenu() {
+        return menu;
     }
+
+    public Playing getPlaying() {
+        return playing;
+    }
+
 
 
 }

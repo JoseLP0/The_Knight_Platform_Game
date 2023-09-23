@@ -1,7 +1,18 @@
 package util;
 
+import main.Game;
+import main.GamePanel;
+
 public class Constants {
 
+    public static class UI {
+        public static class Buttons {
+            public static final int B_WIDTH_DEFAULT = 156;
+            public static final int B_HEIGHT_DEFAULT = 72;
+            public static final int B_WIDTH = (int) (B_WIDTH_DEFAULT * Game.SCALE);
+            public static final int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);
+        }
+    }
     public static class PlayerConstant {
         public static final int IDLE = 0;
         public static final int ATTACK_1 = 1;
