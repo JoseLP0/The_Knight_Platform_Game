@@ -50,7 +50,7 @@ public class Player extends Entity {
 
     public void render(Graphics g) {
         g.drawImage(animation[animationIndex][playerAction], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset) , width, height, null);
-        drawHitbox(g);
+//        drawHitbox(g);a
     }
 
     private void updateAnimationTick() {
