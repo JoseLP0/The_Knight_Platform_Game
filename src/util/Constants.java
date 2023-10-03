@@ -5,6 +5,20 @@ import main.GamePanel;
 
 public class Constants {
 
+    public static class Enviroment {
+        public static final int CITY_IMG_WIDTH_DEFAULT = 320;
+        public static final int CITY_IMG_HEIGHT_DEFAULT = 131;
+        public static final int CITY_IMG_WIDTH = (int)(CITY_IMG_WIDTH_DEFAULT * 1.6 * Game.SCALE);
+        public static final int CITY_IMG_HEIGHT = (int)(CITY_IMG_HEIGHT_DEFAULT * 1.6 * Game.SCALE);
+
+        public static final int FOG_IMG_WIDTH_DEFAULT = 320;
+        public static final int FOG_IMG_HEIGHT_DEFAULT = 30;
+        public static final int FOG_IMG_WIDTH = (int)(FOG_IMG_WIDTH_DEFAULT * 1.6 * Game.SCALE);
+        public static final int FOG_IMG_HEIGHT = (int)(FOG_IMG_HEIGHT_DEFAULT * 1.6 * Game.SCALE);
+
+
+    }
+
     public static class UI {
         public static class Buttons {
             public static final int B_WIDTH_DEFAULT = 156;
@@ -58,17 +72,17 @@ public class Constants {
             switch(player_action) {
 
                 case RUNNING:
-                    return 10;
+                    return 8;
                 case IDLE:
-                    return 10;
+                    return 14;
                 case JUMP:
-                    return 3;
+                    return 8;
                 case FALLING:
-                    return 3;
+                    return 9;
                 case GROUND:
                 case HIT:
                 case ATTACK_1:
-                    return 4;
+                    return 7;
                 case ATTACK_2:
                 case JUMP_ATTACK_1:
                 default:

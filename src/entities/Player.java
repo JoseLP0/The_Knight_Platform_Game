@@ -15,15 +15,15 @@ public class Player extends Entity {
     private BufferedImage[][] animation;
     private int animationTick;
     private int animationIndex;
-    private int animationSpeed = 10;
+    private int animationSpeed = 15;
     private int playerAction = IDLE;
     private boolean moving = false;
     private boolean attacking = false;
     private boolean left, up, right, down, jump;
     private float playerSpeed = 1.0f * SCALE;
     private int[][] lvlData;
-    private float xDrawOffset = 24 * SCALE;
-    private float yDrawOffset = 27 * SCALE;
+    private float xDrawOffset = 40 * SCALE;
+    private float yDrawOffset = 35 * SCALE;
 
 
     private float airSpeed = 0f;
@@ -37,7 +37,7 @@ public class Player extends Entity {
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
-        initHitbox(x, y,(int) (19*SCALE), (int) (35*SCALE));
+        initHitbox(x, y,(int) (17*SCALE), (int) (35*SCALE));
     }
 
     public void update() {
@@ -48,9 +48,9 @@ public class Player extends Entity {
         setAnimation();
     }
 
-    public void render(Graphics g) {
-        g.drawImage(animation[animationIndex][playerAction], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset) , width, height, null);
-//        drawHitbox(g);a
+    public void render(Graphics g, int lvlOffset) {
+        g.drawImage(animation[playerAction][animationIndex], (int) (hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset) , width, height, null);
+//        drawHitbox(g);
     }
 
     private void updateAnimationTick() {
@@ -106,8 +106,14 @@ public class Player extends Entity {
             jump();
         }
 
-        if (!left && !right && !inAir) {
-            return;
+//        if (!left && !right && !inAir) {
+//            return;
+//        }
+
+        if (!inAir) {
+            if ((!left & !right) || (right & left)) {
+                return;
+            }
         }
 
         float xSpeed = 0;
@@ -169,10 +175,10 @@ public class Player extends Entity {
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        animation = new BufferedImage[10][5];
+        animation = new BufferedImage[5][14];
         for (int j = 0; j < animation.length; j++) {
             for (int i = 0; i < animation[j].length; i++) {
-                animation[j][i] = img.getSubimage(i * 64, j * 64, 64, 64);
+                animation[j][i] = img.getSubimage(i * 64, j * 63, 64, 64);
             }
         }
     }
